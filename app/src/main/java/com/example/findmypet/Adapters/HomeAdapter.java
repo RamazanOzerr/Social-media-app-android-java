@@ -19,7 +19,7 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter<ViewHolderHome> {
 
     private List<Post> postList;
-    int view_type_photo = 1, view_type_video = 2;
+    int view_type_photo = 1, view_type_video = 2, view_type_text;
 
     public HomeAdapter(List<Post> postList) {
         this.postList = postList;
