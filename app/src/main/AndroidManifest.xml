@@ -16,10 +16,12 @@
             android:exported="false" />
         <activity
             android:name=".Activities.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Activities.LoginActivity"/>
         <activity
             android:name=".Activities.LoginActivity"
-            android:exported="true" >
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

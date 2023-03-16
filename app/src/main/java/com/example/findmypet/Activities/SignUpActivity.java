@@ -40,6 +40,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         signUp();
 
+        MaterialToolbar toolbar = findViewById(R.id.toolBar_signup);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void signUp(){
