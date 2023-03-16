@@ -12,14 +12,26 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_search"
         android:name="com.example.findmypet.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_post"
+        android:name="com.example.findmypet.ui.Post.PostFragment"
+        android:label="@string/title_post"
+        tools:layout="@layout/fragment_post" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.findmypet.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.findmypet.ui.Profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>
