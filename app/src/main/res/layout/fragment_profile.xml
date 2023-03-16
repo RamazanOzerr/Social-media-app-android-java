@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.Profile.ProfileFragment">
+<!--    android:background="@color/seashell"-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_top_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_profile_fragment"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/ic_account"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_followers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_profile_fragment"
+                    android:text="followers"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_followers_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/text_followers"
+                    app:layout_constraintTop_toBottomOf="@+id/text_followers"
+                    app:layout_constraintEnd_toEndOf="@+id/text_followers"
+                    android:text="31"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_posts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/image_profile_fragment"
+                    app:layout_constraintTop_toBottomOf="@+id/image_profile_fragment"
+                    app:layout_constraintEnd_toEndOf="@+id/image_profile_fragment"
+                    android:text="posts"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_posts_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/text_posts"
+                    app:layout_constraintTop_toBottomOf="@+id/text_posts"
+                    app:layout_constraintEnd_toEndOf="@+id/text_posts"
+                    android:text="31"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_followings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/image_profile_fragment"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="following"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_followings_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/text_followings"
+                    app:layout_constraintTop_toBottomOf="@+id/text_followings"
+                    app:layout_constraintEnd_toEndOf="@+id/text_followings"
+                    android:text="31"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_mid_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/layout_top_profile"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_username_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="user name"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_name_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/text_username_profile"
+                    android:text="name"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_bio_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/text_name_profile"
+                    android:text="Galatasaray Teknik direktörü, Türkiyenin en iyisi, GOAT after Messi"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_mid_profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_password_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="forget password"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:padding="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_signout_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/text_password_profile"
+                    app:layout_constraintEnd_toEndOf="@+id/text_password_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/text_password_profile"
+                    android:text="sign out"
+                    android:textSize="18sp"
+                    android:textColor="@color/red"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_delete_account_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/text_signout_profile"
+                    app:layout_constraintEnd_toEndOf="@+id/text_signout_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/text_signout_profile"
+                    android:text="delete account"
+                    android:textSize="18sp"
+                    android:textColor="@color/red"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
