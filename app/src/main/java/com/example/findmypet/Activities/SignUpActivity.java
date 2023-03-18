@@ -1,14 +1,13 @@
 package com.example.findmypet.Activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.example.findmypet.R;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.findmypet.databinding.ActivitySignUpBinding;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 public class SignUpActivity extends AppCompatActivity {
@@ -38,12 +38,20 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         progressBar2 = findViewById(R.id.progressBar);
 
-        signUp();
-
         MaterialToolbar toolbar = findViewById(R.id.toolBar_signup);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try{
+            ActionBar actionBar = getSupportActionBar();
+            if(actionBar != null)
+                actionBar.setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){
+            // setDisplayHomeAsUpEnabled method could not set
+        }
 
+        TextView textLogin = findViewById(R.id.haveAnAccountText);
+        textLogin.setOnClickListener(view -> openLogin());
+
+        signUp();
     }
 
     public void signUp(){
@@ -78,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
             firebaseAuth.createUserWithEmailAndPassword(email , password).addOnCompleteListener(task -> {
 
                 if(task.isSuccessful()) {
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(),SignUpSetProfileActivity.class));
                 }
                 else {
                     Toast.makeText(SignUpActivity.this, "Error!" , Toast.LENGTH_LONG).show();

@@ -7,19 +7,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.findmypet.Models.PhotoPost;
 import com.example.findmypet.Models.Post;
-import com.example.findmypet.Models.VideoPost;
 import com.example.findmypet.R;
-import com.example.findmypet.ViewHolders.ViewHolderHome;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<ViewHolderHome> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private List<Post> postList;
-    int view_type_photo = 1, view_type_video = 2, view_type_text;
+    int view_type_photo = 1, view_type_video = 2, view_type_text = 3;
 
     public HomeAdapter(List<Post> postList) {
         this.postList = postList;
@@ -27,25 +23,25 @@ public class HomeAdapter extends RecyclerView.Adapter<ViewHolderHome> {
 
     @NonNull
     @Override
-    public ViewHolderHome onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view;
         if(viewType == view_type_photo){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.photo_post_item,
                     parent,false);
-            return new ViewHolderHome(view);
+            return new ViewHolder(view);
 
         }else{
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_post_item,
                     parent,false);
-            return new ViewHolderHome(view);
+            return new ViewHolder(view);
         }
 
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderHome holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
     }
 
@@ -72,6 +68,13 @@ public class HomeAdapter extends RecyclerView.Adapter<ViewHolderHome> {
             return view_type_photo;
         }else{
             return view_type_video;
+        }
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

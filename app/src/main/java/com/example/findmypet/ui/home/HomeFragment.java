@@ -1,5 +1,6 @@
 package com.example.findmypet.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +29,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private List<Post> postList;
     private RecyclerView recyclerView_home;
-
+    private HomeAdapter adapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -36,7 +39,6 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-
         View root = binding.getRoot();
 
 //        final TextView textView = binding.textHome;
@@ -44,27 +46,38 @@ public class HomeFragment extends Fragment {
 
 
         init();
+        homeViewModel.getPostMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
+            @Override
+            public void onChanged(List<Post> posts) {
+                // update ui
+                postList.clear();
+                postList.addAll(posts);
+//                adapter.notifyDataSetChanged();
+                //todo: burası veriyi güncelleyeceğimiz yer normalde, ama şu an db ye bağlamadığımız
+                // için henüz, adapter ı burada set ediyoruz, sonradan değiştiricez, adapter setlemesi
+                // init de olucak, burda sadece update olucak
+
+                adapter = new HomeAdapter(postList);
+                recyclerView_home.setAdapter(adapter);
+            }
+        });
+
+
+
         return root;
     }
+
+
 
     private void init(){
         recyclerView_home = binding.recyclerViewHome;
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView_home.setLayoutManager(layoutManager);
         postList = new ArrayList<>();
-        getPosts();
+
     }
 
-    private void getPosts(){
-        Post post = new Post("media","photo","username",
-                2,5,"photo");
-        postList.add(post);
-        postList.add(post);
-        postList.add(post);
-        postList.add(post);
-        HomeAdapter adapter = new HomeAdapter(postList);
-        recyclerView_home.setAdapter(adapter);
-    }
+
 
     @Override
     public void onDestroyView() {

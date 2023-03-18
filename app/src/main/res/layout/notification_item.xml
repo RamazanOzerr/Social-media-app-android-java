@@ -34,7 +34,7 @@
                 app:layout_constraintStart_toEndOf="@+id/image_noti"
                 app:layout_constraintTop_toTopOf="@+id/image_noti"
                 app:layout_constraintBottom_toTopOf="@+id/text_event_noti"
-                tools:text="fatih terim"
+                android:text="fatih terim"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 />
@@ -46,7 +46,7 @@
                 app:layout_constraintStart_toEndOf="@+id/image_noti"
                 app:layout_constraintBottom_toBottomOf="@id/image_noti"
                 app:layout_constraintTop_toBottomOf="@+id/text_username_noti"
-                tools:text="sent you a message"
+                android:text="sent you a message"
                 android:textSize="16sp"
                 android:textColor="@color/black" />
 
