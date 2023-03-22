@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        android:title="search"
+        android:contentDescription="content_description_search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView" />
+
+   <item
+       android:id="@+id/chats"
+       android:icon="@drawable/ic_action_chats_black"
+       android:title="chats"
+       app:showAsAction="ifRoom"
+       />
+
+</menu>

@@ -3,11 +3,16 @@ package com.example.findmypet.ui.home;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -19,6 +24,7 @@ import com.example.findmypet.Adapters.HomeAdapter;
 import com.example.findmypet.Models.PhotoPost;
 import com.example.findmypet.Models.Post;
 import com.example.findmypet.Models.VideoPost;
+import com.example.findmypet.R;
 import com.example.findmypet.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -77,7 +83,33 @@ public class HomeFragment extends Fragment {
 
     }
 
+    // call onCreateOptionsMenu
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
 
+    // set search feature
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+//                userAdapter.getFilter().filter(s);
+                //todo: adapter ı cağırıp filter ı aktif ettiğimiz yer
+                return false;
+            }
+        });
+    }
 
     @Override
     public void onDestroyView() {

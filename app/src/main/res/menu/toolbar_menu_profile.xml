@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/settings"
+        android:title="settings"
+        android:contentDescription="content_description_profile"
+        app:showAsAction="never" />
+
+
+</menu>

@@ -29,7 +29,12 @@ public class NotificationsViewModel extends ViewModel {
 
     //todo: db den verileri çekip burda set etcez
     private void populateList(){
-        NotificationModel notificationModel = new NotificationModel("1","2","3");
+        NotificationModel notificationModel = new NotificationModel("notification",
+                "username","notification body");
+        notificationModelList.add(notificationModel);
+        notificationModelList.add(notificationModel);
+        notificationModelList.add(notificationModel);
+        notificationModelList.add(notificationModel);
         notificationModelList.add(notificationModel);
         notificationModelList.add(notificationModel);
         notificationModelList.add(notificationModel);

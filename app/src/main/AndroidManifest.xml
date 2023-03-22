@@ -21,14 +21,7 @@
 
         <activity
             android:name=".Activities.SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.SignUpActivity"
-            android:exported="false"
-            android:parentActivityName=".Activities.LoginActivity" />
-        <activity
-            android:name=".Activities.LoginActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,8 +29,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activities.SignUpActivity"
+            android:exported="false"
+            android:parentActivityName=".Activities.LoginActivity" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
             android:name=".Activities.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
     </application>
 
 </manifest>

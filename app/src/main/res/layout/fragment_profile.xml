@@ -1,221 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.Profile.ProfileFragment">
-<!--    android:background="@color/seashell"-->
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_profile_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:title="@string/title_profile"
+        app:titleTextColor="@color/black"
+        app:menu="@menu/toolbar_menu_profile"
+        android:layout_alignParentTop="true"
+        />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_profile_fragment"
+        >
+        <!-- User fotoğrafı -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@mipmap/ic_account" />
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/user_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_top_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                >
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/image_profile_fragment"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@mipmap/ic_account"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_followers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_profile_fragment"
-                    android:text="followers"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_followers_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/text_followers"
-                    app:layout_constraintTop_toBottomOf="@+id/text_followers"
-                    app:layout_constraintEnd_toEndOf="@+id/text_followers"
-                    android:text="31"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_posts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/image_profile_fragment"
-                    app:layout_constraintTop_toBottomOf="@+id/image_profile_fragment"
-                    app:layout_constraintEnd_toEndOf="@+id/image_profile_fragment"
-                    android:text="posts"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_posts_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/text_posts"
-                    app:layout_constraintTop_toBottomOf="@+id/text_posts"
-                    app:layout_constraintEnd_toEndOf="@+id/text_posts"
-                    android:text="31"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_followings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/image_profile_fragment"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:text="following"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_followings_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/text_followings"
-                    app:layout_constraintTop_toBottomOf="@+id/text_followings"
-                    app:layout_constraintEnd_toEndOf="@+id/text_followings"
-                    android:text="31"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_mid_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/layout_top_profile"
-                >
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_username_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="user name"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:layout_marginTop="20dp"
-                    android:padding="10dp"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_name_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/text_username_profile"
-                    android:text="name"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:layout_marginTop="20dp"
-                    android:padding="10dp"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_bio_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/text_name_profile"
-                    android:text="Galatasaray Teknik direktörü, Türkiyenin en iyisi, GOAT after Messi"
-                    android:textSize="22sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/shape"
-                    android:layout_marginTop="20dp"
-                    android:padding="10dp"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Followers -->
+            <TextView
+                android:id="@+id/followers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_mid_profile"
-                app:layout_constraintBottom_toBottomOf="parent"
-                >
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_password_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="forget password"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:padding="10dp"
-                    />
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Followers: 0"
+                android:textStyle="italic|bold"
+                android:textSize="20sp"
+                />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_signout_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/text_password_profile"
-                    app:layout_constraintEnd_toEndOf="@+id/text_password_profile"
-                    app:layout_constraintTop_toBottomOf="@+id/text_password_profile"
-                    android:text="sign out"
-                    android:textSize="18sp"
-                    android:textColor="@color/red"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    />
+            <!-- Followings -->
+            <TextView
+                android:id="@+id/followings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/followers"
+                android:layout_margin="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="Followings: 0"
+                android:textStyle="italic|bold"
+                android:textSize="20sp"/>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_delete_account_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/text_signout_profile"
-                    app:layout_constraintEnd_toEndOf="@+id/text_signout_profile"
-                    app:layout_constraintTop_toBottomOf="@+id/text_signout_profile"
-                    android:text="delete account"
-                    android:textSize="18sp"
-                    android:textColor="@color/red"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
+            <!-- Posts -->
+            <TextView
+                android:id="@+id/posts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/followings"
+                android:layout_margin="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="Posts: 0"
+                android:textStyle="italic|bold"
+                android:textSize="20sp"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Username -->
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/constraintLayout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Username"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        />
+
+    <!-- Name -->
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:layout_margin="10dp"
+        android:hint="Name"
+        android:textSize="20sp"
+        android:textStyle="italic"/>
+
+    <!-- Bio -->
+    <EditText
+        android:id="@+id/bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_margin="10dp"
+        android:hint="Bio"
+        android:textSize="20sp"
+        android:textStyle="italic"/>
+
+
+
+    <!-- Forget password -->
+    <Button
+        android:id="@+id/forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bio"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/seashell"
+        android:text="Forget Password"
+        android:textStyle="italic"
+        android:textColor="@color/black"/>
+
+    <!-- Delete account -->
+    <Button
+        android:id="@+id/delete_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/forget_password"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/seashell"
+        android:text="Delete Account"
+        android:textStyle="italic"
+        android:textColor="@color/black"/>
+
+    <!-- Sign out -->
+    <Button
+        android:id="@+id/sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/delete_account"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/seashell"
+        android:layout_margin="10dp"
+        android:text="Sıgn Out"
+        android:textStyle="italic"
+        android:textColor="@color/black"/>
+
+</RelativeLayout>
