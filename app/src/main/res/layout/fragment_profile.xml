@@ -162,10 +162,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/delete_account"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/seashell"
-        android:layout_margin="10dp"
         android:text="Sıgn Out"
-        android:textStyle="italic"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textStyle="italic" />
 
 </RelativeLayout>

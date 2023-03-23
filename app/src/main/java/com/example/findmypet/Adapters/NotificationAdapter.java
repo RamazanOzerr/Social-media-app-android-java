@@ -49,10 +49,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
 
         try{
-            Picasso.get().load(notificationModelList.get(position)
-                    .getPhoto()).into(holder.image_noti);
+            //todo: debug için şimdilik fotoyu kendimiz set ediyoruz, db devreye girince yorumdan
+            // çıkarcaz methodu
+//            Picasso.get().load(notificationModelList.get(position)
+//                    .getPhoto()).into(holder.image_noti);
+            holder.image_noti.setImageResource(R.mipmap.ic_account);
         }catch (Exception e){
             // it'll set the default photo, so it'll remain as it is setted in xml file
+            holder.image_noti.setImageResource(R.mipmap.ic_account);
         }
 
 

@@ -4,7 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_profile">Profile</string>
     <string name="title_Search">Search</string>
-    <string name="title_post">Post</string>
+    <string name="title_post">New Post</string>
     <string name="title_notifications">Notifications</string>
     <string name="fatih_terim_sample_caption">Yeni bir Eylül ayının başka bir dördüncü günü geride kalırken, duygularımı anlatabilmem pek kolay değil. Ama deneyeceğim… Yıllar geçiyor, hatıralar artıyor; sevinçler de durmuyor hüzünler de, hayat devam ederken belki eskisi gibi olmuyor birçok şey ama bu sevgiyi hayattayken, birebir görmek ve bizzat yaşamak çok güzel. Her sene tam da bugün hissettiklerim hep samimi, hep çok özel ve tarifi her defasında daha da zor. Günün ilk saniyesinden itibaren tüm güzel sözleri, mesajları ve sevgisiyle kalbimi dolduran aileme, dostlarıma, kulübüm Galatasaray’a, İtalya’daki evim Fiorentina’ya, Türkiye’deki ve dünyanın dört bir yanındaki meslektaşlarıma, birlikte çalıştığım tüm arkadaşlarıma, çoğunu evladım olarak gördüğüm oyuncularıma ve başta Galatasaray taraftarı olmak üzere varlıklarıyla beni daha güçlü kılan herkese çok teşekkür ederim. İyi ki varsınız..</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -27,6 +27,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="post_hint">What do you want to talk about?</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
