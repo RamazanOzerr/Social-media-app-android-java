@@ -17,7 +17,7 @@ import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder>{
 
-    private List<NotificationModel> notificationModelList;
+    private final List<NotificationModel> notificationModelList;
     View view;
 
     public NotificationAdapter(List<NotificationModel> notificationModelList) {
