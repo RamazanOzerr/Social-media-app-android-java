@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/search_home"
         android:title="search"
         android:contentDescription="content_description_search"
         app:showAsAction="ifRoom"

@@ -2,12 +2,21 @@ package com.example.findmypet.Models;
 
 public class ChatModel {
 
-    private String photo, name, text;
+    private String photo, name, text, status;
 
-    public ChatModel(String photo, String name, String text) {
+    public ChatModel(String photo, String name, String text, String status) {
         this.photo = photo;
         this.name = name;
         this.text = text;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPhoto() {

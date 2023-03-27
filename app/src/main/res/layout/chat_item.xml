@@ -24,8 +24,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@mipmap/ic_account"
-            app:civ_border_width="3dp"
+            android:src="@drawable/ic_account"
+            app:civ_border_width="6dp"
             app:civ_border_color="@color/neongreen"
             />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/image_chat_item"
             app:layout_constraintTop_toTopOf="@+id/image_chat_item"
-            app:layout_constraintBottom_toTopOf="@+id/text_event_noti"
+            app:layout_constraintBottom_toTopOf="@+id/text_chats"
             android:text="fatih terim"
             android:textSize="16sp"
             android:textColor="@color/black"
@@ -43,7 +43,7 @@
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_event_noti"
+            android:id="@+id/text_chats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/image_chat_item"

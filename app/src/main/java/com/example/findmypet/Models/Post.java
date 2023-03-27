@@ -7,15 +7,36 @@ public class Post {
     private int total_likes;
     private int total_comments;
     private String type;
+    private String caption;
+    private String status;
+
 
     public Post(String post_media, String user_profile_photo, String username,
-                int total_likes, int total_comments, String type) {
+                int total_likes, int total_comments, String type, String caption, String status) {
         this.post_media = post_media;
         this.user_profile_photo = user_profile_photo;
         this.username = username;
         this.total_likes = total_likes;
         this.total_comments = total_comments;
         this.type = type;
+        this.caption = caption;
+        this.status = status;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getType() {

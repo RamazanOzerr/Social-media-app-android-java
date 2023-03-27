@@ -49,24 +49,25 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                x1 = event.getX();
-                y1 = event.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = event.getX();
-                y2 = event.getY();
-                if(x1 < x2){
-                    startActivity(new Intent(MainActivity.this, ChatsActivity.class));
-                }
-                break;
-        }
-
-        return super.onTouchEvent(event);
-    }
+    // we don't use this anymore
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        switch (event.getAction()){
+//            case MotionEvent.ACTION_DOWN:
+//                x1 = event.getX();
+//                y1 = event.getY();
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                x2 = event.getX();
+//                y2 = event.getY();
+//                if(x1 < x2){
+//                    startActivity(new Intent(MainActivity.this, ChatsActivity.class));
+//                }
+//                break;
+//        }
+//
+//        return super.onTouchEvent(event);
+//    }
 
 
 

@@ -26,18 +26,20 @@ public class ChatsViewModel extends ViewModel {
 
     //todo: db den verileri çekip burda set etcez
     private void populateList(){
-        ChatModel chatModel = new ChatModel("photo","fatih terim","merhaba koçum");
-        chatsModelList.add(chatModel);
-        chatsModelList.add(chatModel);
-        chatsModelList.add(chatModel);
-        chatsModelList.add(chatModel);
-        chatsModelList.add(chatModel);
-        chatsModelList.add(chatModel);
-        chatsModelList.add(chatModel);
-        chatsModelList.add(chatModel);
+        ChatModel chatModel1 = new ChatModel("photo","fatih terim","merhaba koçum", "online");
+        ChatModel chatModel2 = new ChatModel("photo","leonel messi","merhaba koçum", "offline");
+        chatsModelList.add(chatModel1);
+        chatsModelList.add(chatModel2);
+        chatsModelList.add(chatModel1);
+        chatsModelList.add(chatModel1);
+        chatsModelList.add(chatModel2);
+        chatsModelList.add(chatModel1);
+        chatsModelList.add(chatModel2);
+        chatsModelList.add(chatModel2);
+        chatsModelList.add(chatModel2);
     }
 
-    public LiveData<List<ChatModel>> getNotifications() {
+    public LiveData<List<ChatModel>> getChats() {
         return chatsModel;
     }
 }
