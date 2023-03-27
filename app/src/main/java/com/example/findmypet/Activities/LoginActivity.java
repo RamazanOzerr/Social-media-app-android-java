@@ -112,4 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         signInTextView.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
     }
+
+    // todo: google auto sign up will be added here
+
 }
