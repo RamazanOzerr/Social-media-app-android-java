@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,15 +18,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.findmypet.Activities.ChatsActivity;
+import com.example.findmypet.Activities.MainActivity;
 import com.example.findmypet.Adapters.HomeAdapter;
 import com.example.findmypet.Models.Post;
 import com.example.findmypet.R;
 import com.example.findmypet.Utils.OnSwipeTouchListener;
 import com.example.findmypet.databinding.FragmentHomeBinding;
 import com.google.android.material.appbar.MaterialToolbar;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,44 +107,56 @@ public class HomeFragment extends Fragment {
             }
 
         });
+
+        SwipeRefreshLayout swipeRefreshLayout = binding.swipeToRefreshHome;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //update
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
 
-//    // call onCreateOptionsMenu
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        setHasOptionsMenu(true);
-//        super.onCreate(savedInstanceState);
-//    }
-//
-//    // set search feature
-//    @Override
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        MenuItem searchItem = menu.findItem(R.id.search_home);
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                adapter.getFilter().filter(s);
-//                //todo: adapter ı cağırıp filter ı aktif ettiğimiz yer
-//                return false;
-//            }
-//        });
-//    }
+    // call onCreateOptionsMenu
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if(item.getItemId() == R.id.chats){
-//            startActivity(new Intent(getContext(), ChatsActivity.class));
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    // set search feature
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.toolbar_menu_home,menu);
+        MenuItem searchItem = menu.findItem(R.id.search_home);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.chats){
+            startActivity(new Intent(getContext(), ChatsActivity.class));
+            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onDestroyView() {

@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -23,6 +25,8 @@ import com.example.findmypet.Models.ChatModel;
 import com.example.findmypet.Models.Post;
 import com.example.findmypet.R;
 import com.google.android.material.textview.MaterialTextView;
+import com.pedromassango.doubleclick.DoubleClick;
+import com.pedromassango.doubleclick.DoubleClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     private List<Post> postListFull;
     private final int view_type_photo = 1, view_type_video = 2;
     private static int viewType;
-    private Boolean isLiked;
+    private Boolean isLiked = false;
+
+    private GestureDetector gestureDetector;
 
     AnimatedVectorDrawableCompat avd;
     AnimatedVectorDrawable avd2;
@@ -115,9 +121,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
 
 
         final Drawable drawable = holder.image_heart.getDrawable();
-        holder.image_post.setOnClickListener(new View.OnClickListener() {
+
+        holder.image_post.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onSingleClick(View view) {
+
+            }
+
+            @Override
+            public void onDoubleClick(View view) {
                 holder.image_heart.setAlpha(0.70f);
                 if(drawable instanceof AnimatedVectorDrawableCompat){
                     avd = (AnimatedVectorDrawableCompat) drawable;
@@ -132,7 +144,25 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 String like_num = String.valueOf(postList.get(position).getTotal_likes()+1);
                 holder.text_likes.setText("liked by "+like_num+" people");
             }
-        });
+        }));
+//        holder.image_post.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.image_heart.setAlpha(0.70f);
+//                if(drawable instanceof AnimatedVectorDrawableCompat){
+//                    avd = (AnimatedVectorDrawableCompat) drawable;
+//                    avd.start();
+//                    isLiked = true;
+//                }else if(drawable instanceof AnimatedVectorDrawable){
+//                    avd2 = (AnimatedVectorDrawable) drawable;
+//                    avd2.start();
+//                    isLiked = true;
+//                }
+//                holder.image_like.setImageResource(R.drawable.heart_filled);
+//                String like_num = String.valueOf(postList.get(position).getTotal_likes()+1);
+//                holder.text_likes.setText("liked by "+like_num+" people");
+//            }
+//        });
 
         holder.image_like.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +179,26 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             }
         });
 
+    }
+
+    public GestureDetector getGestureDetector() {
+        gestureDetector.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
+            @Override
+            public boolean onSingleTapConfirmed(@NonNull MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public boolean onDoubleTap(@NonNull MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public boolean onDoubleTapEvent(@NonNull MotionEvent motionEvent) {
+                return false;
+            }
+        });
+        return gestureDetector;
     }
 
     @Override
@@ -259,4 +309,5 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             notifyDataSetChanged();
         }
     };
+
 }

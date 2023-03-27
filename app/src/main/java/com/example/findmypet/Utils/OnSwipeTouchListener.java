@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import androidx.annotation.NonNull;
+
 /**
  * Detects left and right swipes across a view.
  */
@@ -40,15 +42,20 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            float distanceX = e2.getX() - e1.getX();
-            float distanceY = e2.getY() - e1.getY();
-            if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                if (distanceX > 0)
-                    onSwipeRight();
-                else
-                    onSwipeLeft();
-                return true;
-            }
+
+         try{
+             float distanceX = e2.getX() - e1.getX();
+             float distanceY = e2.getY() - e1.getY();
+             if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                 if (distanceX > 0)
+                     onSwipeRight();
+                 else
+                     onSwipeLeft();
+                 return true;
+             }
+         }catch (Exception e){
+             // do nothing
+         }
             return false;
         }
 

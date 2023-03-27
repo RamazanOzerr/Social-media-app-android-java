@@ -71,20 +71,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if(item.getItemId() == R.id.chats){
-            startActivity(new Intent(MainActivity.this, ChatsActivity.class));
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.toolbar_menu_home, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//
+//        if(item.getItemId() == R.id.chats){
+//            startActivity(new Intent(MainActivity.this, ChatsActivity.class));
+//            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }

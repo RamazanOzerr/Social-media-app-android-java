@@ -21,7 +21,8 @@
         android:id="@+id/navigation_post"
         android:name="com.example.findmypet.Activities.PostActivity"
         android:label="@string/title_post"
-        tools:layout="@layout/activity_post" />
+        tools:layout="@layout/activity_post"
+        />
 
     <fragment
         android:id="@+id/navigation_notifications"

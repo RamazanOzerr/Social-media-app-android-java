@@ -40,6 +40,7 @@ dependencies {
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
+    implementation 'com.github.pedromassango:doubleClick:3.0'
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
