@@ -1,6 +1,9 @@
 package com.example.findmypet.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,9 +21,12 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
+import com.example.findmypet.Activities.ViewLikesActivity;
 import com.example.findmypet.Models.ChatModel;
 import com.example.findmypet.Models.Post;
 import com.example.findmypet.R;
@@ -40,15 +46,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     private final int view_type_photo = 1, view_type_video = 2;
     private static int viewType;
     private Boolean isLiked = false;
-
-    private GestureDetector gestureDetector;
-
     AnimatedVectorDrawableCompat avd;
     AnimatedVectorDrawable avd2;
+    private Activity activity;
+    private Context context;
 
-    public HomeAdapter(List<Post> postList) {
+    public HomeAdapter(List<Post> postList, Activity activity, Context context) {
         this.postList = postList;
         postListFull = new ArrayList<>(postList);
+        this.activity = activity;
+        this.context = context;
     }
 
     @NonNull
@@ -101,6 +108,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
 //            // get it from xml
 //        }
 
+        // written for debug
         if(postList.get(position).getStatus().equals("online")){
             holder.image_profile.setBorderColor(Color.GREEN);
         }else{
@@ -120,12 +128,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
         }
 
 
+        // double click on the post to like it
         final Drawable drawable = holder.image_heart.getDrawable();
 
         holder.image_post.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
-
+                holder.image_like.setImageResource(R.drawable.heart);
+                isLiked = false;
+                String like_num = String.valueOf(postList.get(position).getTotal_likes());
+                holder.text_likes.setText("liked by "+like_num+" people");
             }
 
             @Override
@@ -145,25 +157,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 holder.text_likes.setText("liked by "+like_num+" people");
             }
         }));
-//        holder.image_post.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                holder.image_heart.setAlpha(0.70f);
-//                if(drawable instanceof AnimatedVectorDrawableCompat){
-//                    avd = (AnimatedVectorDrawableCompat) drawable;
-//                    avd.start();
-//                    isLiked = true;
-//                }else if(drawable instanceof AnimatedVectorDrawable){
-//                    avd2 = (AnimatedVectorDrawable) drawable;
-//                    avd2.start();
-//                    isLiked = true;
-//                }
-//                holder.image_like.setImageResource(R.drawable.heart_filled);
-//                String like_num = String.valueOf(postList.get(position).getTotal_likes()+1);
-//                holder.text_likes.setText("liked by "+like_num+" people");
-//            }
-//        });
 
+        // set like or undo it by pressing like button
         holder.image_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,27 +174,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             }
         });
 
-    }
-
-    public GestureDetector getGestureDetector() {
-        gestureDetector.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
+        // click on likes text to view all people who likes the post
+        holder.text_likes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onSingleTapConfirmed(@NonNull MotionEvent motionEvent) {
-                return false;
-            }
-
-            @Override
-            public boolean onDoubleTap(@NonNull MotionEvent motionEvent) {
-                return false;
-            }
-
-            @Override
-            public boolean onDoubleTapEvent(@NonNull MotionEvent motionEvent) {
-                return false;
+            public void onClick(View view) {
+                activity.startActivity(new Intent(context, ViewLikesActivity.class));
             }
         });
-        return gestureDetector;
+
+
     }
+
+//    public void openBlankFragment(View view) {
+//        ViewLikesFragment blankFragment = new ViewLikesFragment();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.nav_host_fragment_activity_main, blankFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//    }
 
     @Override
     public int getItemCount() {

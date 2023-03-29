@@ -1,6 +1,7 @@
 package com.example.findmypet.ui.home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +31,7 @@ import com.example.findmypet.databinding.FragmentHomeBinding;
 import com.google.android.material.appbar.MaterialToolbar;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -36,6 +39,7 @@ public class HomeFragment extends Fragment {
     private List<Post> postList;
     private RecyclerView recyclerView_home;
     private HomeAdapter adapter;
+    Activity activity;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -78,7 +82,7 @@ public class HomeFragment extends Fragment {
                 // için henüz, adapter ı burada set ediyoruz, sonradan değiştiricez, adapter setlemesi
                 // init de olucak, burda sadece update olucak
 
-                adapter = new HomeAdapter(postList);
+                adapter = new HomeAdapter(postList, getActivity(), getContext());
                 recyclerView_home.setAdapter(adapter);
             }
         });
@@ -86,6 +90,10 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
+//    public FragmentManager getMyFragmentManager() {
+//        return getChildFragmentManager();
+//    }
 
     @SuppressLint("ClickableViewAccessibility")
     private void init(){

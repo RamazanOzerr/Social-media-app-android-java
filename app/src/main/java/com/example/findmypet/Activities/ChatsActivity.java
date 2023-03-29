@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,6 +64,10 @@ public class ChatsActivity extends AppCompatActivity {
         chatModelList = new ArrayList<>();
         MaterialToolbar toolbar = findViewById(R.id.toolbar_chats_activity);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_cancel1);
+        toolbar.setNavigationOnClickListener(view ->
+                startActivity(new Intent(ChatsActivity.this, MainActivity.class)));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     @Override

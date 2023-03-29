@@ -43,6 +43,7 @@ public class PostActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_cancel1);
         toolbar.setNavigationOnClickListener(view ->
                 startActivity(new Intent(PostActivity.this, MainActivity.class)));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         Slidr.attach(this);
 //        Slidr.attach(this);*/

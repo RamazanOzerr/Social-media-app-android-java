@@ -4,35 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ui.view_likes.ViewLikesFragment"
+    android:id="@+id/constraint_home_fragment"
     android:background="@color/white"
-    tools:context=".Activities.ChatsActivity">
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_chats_activity"
+            android:id="@+id/toolbar_viewlikes_fragment"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="wrap_content"
             android:background="@color/white"
-            app:title="@string/chats"
+            app:title="@string/view_likes"
             app:titleTextColor="@color/black"
-            app:menu="@menu/toolbar_menu_search"
+            app:menu="@menu/toolbar_likes_menu"
             app:layout_constraintTop_toTopOf="parent"
             />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_chats_activity"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_to_refresh_viewLikes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/notification_item"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_viewlikes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_main_fragment"
+            tools:listitem="@layout/viewlikes_item" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 
 

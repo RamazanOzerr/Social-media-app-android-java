@@ -16,14 +16,20 @@
         android:theme="@style/Theme.FindMyPet"
         tools:targetApi="31">
         <activity
+            android:name=".CommentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ViewLikesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FindMyPet.SlidrActivityTheme" />
+        <activity
             android:name=".Activities.PostActivity"
             android:exported="false"
-            android:theme="@style/Theme.FindMyPet.SlidrActivityTheme"/>
+            android:theme="@style/Theme.FindMyPet.SlidrActivityTheme" />
         <activity
             android:name=".Activities.ChatsActivity"
             android:exported="false"
-            android:theme="@style/Theme.FindMyPet.SlidrActivityTheme"
-            />
+            android:theme="@style/Theme.FindMyPet.SlidrActivityTheme" />
         <activity
             android:name=".Activities.SignUpSetProfileActivity"
             android:exported="false" />
@@ -42,12 +48,10 @@
             android:parentActivityName=".Activities.LoginActivity" />
         <activity
             android:name=".Activities.LoginActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="true"
-           />
+            android:exported="true" />
     </application>
 
 </manifest>

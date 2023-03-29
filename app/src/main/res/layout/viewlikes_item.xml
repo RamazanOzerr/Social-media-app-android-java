@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:background="@drawable/shape"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
+        android:id="@+id/constraint_viewlikes"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_viewlikes"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_account"
+            app:civ_border_width="6dp"
+            app:civ_border_color="@color/neongreen"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_name_viewlikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/image_viewlikes"
+            app:layout_constraintTop_toTopOf="@+id/image_viewlikes"
+            app:layout_constraintBottom_toTopOf="@+id/text_username_viewlikes"
+            android:text="fatih terim"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold|italic"
+            android:layout_marginStart="10dp"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_username_viewlikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/image_viewlikes"
+            app:layout_constraintBottom_toBottomOf="@id/text_bio_viewlikes"
+            app:layout_constraintTop_toBottomOf="@+id/text_name_viewlikes"
+            android:text="fatihterimm"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_bio_viewlikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/image_viewlikes"
+            app:layout_constraintBottom_toBottomOf="@id/image_viewlikes"
+            app:layout_constraintTop_toBottomOf="@+id/text_username_viewlikes"
+            android:text="I am the fucking goat of turkey"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:ellipsize="end"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_follow_viewlikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_bio_viewlikes"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="FOLLOW"
+            android:textColor="@color/black"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:background="@drawable/shape_button"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
