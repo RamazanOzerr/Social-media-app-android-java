@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
+import com.example.findmypet.Activities.CommentsActivity;
 import com.example.findmypet.Activities.ViewLikesActivity;
 import com.example.findmypet.Models.ChatModel;
 import com.example.findmypet.Models.Post;
@@ -179,6 +180,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             @Override
             public void onClick(View view) {
                 activity.startActivity(new Intent(context, ViewLikesActivity.class));
+            }
+        });
+
+        holder.text_comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.startActivity(new Intent(context, CommentsActivity.class));
             }
         });
 

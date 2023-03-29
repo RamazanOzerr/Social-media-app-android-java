@@ -30,6 +30,7 @@
     <string name="post_hint">What do you want to talk about?</string>
     <string name="chats">Bastards</string>
     <string name="view_likes">Liked by</string>
+    <string name="comments">comments</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
