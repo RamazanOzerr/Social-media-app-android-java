@@ -2,10 +2,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/settings"
+        android:id="@+id/settings_home"
         android:title="settings"
         android:contentDescription="content_description_profile"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/posts_home"
+        android:title="posts"
+        android:contentDescription="content_description_profile"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/saved_home"
+        android:title="saved"
+        android:contentDescription="content_description_profile"
+        app:showAsAction="never" />
 
 </menu>
