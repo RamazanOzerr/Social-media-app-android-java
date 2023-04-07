@@ -23,35 +23,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar_post_activity"
+        android:layout_marginTop="10dp"
         android:clipToOutline="true"
         android:background="@null"
         android:padding="10dp"
         android:hint="@string/post_hint"
         />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_post_activity"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edittext_post"
         android:layout_above="@+id/floatingbtn"
-        android:src="@drawable/fatih_terim"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:visibility="visible"
-        />
+        app:cardCornerRadius="10dp"
+        app:cardMaxElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        >
 
-    <VideoView
-        android:id="@+id/video_post_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edittext_post"
-        android:layout_above="@+id/floatingbtn"
-        android:src="@drawable/fatih_terim"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:visibility="gone"
-        />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="This is where your image or photo will be displayed"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_post_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edittext_post"
+            android:layout_above="@+id/floatingbtn"
+            android:src="@drawable/fatih_terim"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+            />
+
+        <VideoView
+            android:id="@+id/video_post_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edittext_post"
+            android:layout_above="@+id/floatingbtn"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+            />
+
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbtn"
@@ -64,7 +89,7 @@
         android:src="@drawable/ic_send"
         android:backgroundTint="@color/seashell"
         app:borderWidth="0dp"
-        />
+        tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -78,9 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:clickable="true"
-            android:onClick="pickPhotoFromGallery"
             android:src="@drawable/ic_camera"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -92,6 +116,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/ic_video"
             android:layout_margin="10dp"
+            android:padding="10dp"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -102,6 +127,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/ic_gallery"
             android:layout_margin="10dp"
+            android:padding="10dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

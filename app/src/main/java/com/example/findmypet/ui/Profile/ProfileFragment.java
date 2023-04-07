@@ -27,6 +27,7 @@ import com.example.findmypet.Activities.ChatsActivity;
 import com.example.findmypet.Activities.FollowersActivity;
 import com.example.findmypet.Activities.FollowingActivity;
 import com.example.findmypet.Activities.ViewPostsActivity;
+import com.example.findmypet.Activities.ViewProfileActivity;
 import com.example.findmypet.Adapters.HomeAdapter;
 import com.example.findmypet.Models.Post;
 import com.example.findmypet.Models.ProfileModel;
@@ -111,6 +112,13 @@ public class ProfileFragment extends Fragment {
         binding.followings.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), FollowingActivity.class));
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        binding.userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivity(new Intent(getContext(), ViewProfileActivity.class));
+            }
         });
     }
 

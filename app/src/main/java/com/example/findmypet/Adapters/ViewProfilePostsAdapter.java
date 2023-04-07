@@ -7,44 +7,34 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.example.findmypet.Activities.CommentsActivity;
 import com.example.findmypet.Activities.ViewLikesActivity;
-import com.example.findmypet.Activities.ViewProfileActivity;
-import com.example.findmypet.Models.ChatModel;
-import com.example.findmypet.Models.Post;
+import com.example.findmypet.Models.ViewProfilePostModel;
 import com.example.findmypet.R;
 import com.google.android.material.textview.MaterialTextView;
 import com.pedromassango.doubleclick.DoubleClick;
 import com.pedromassango.doubleclick.DoubleClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> implements Filterable {
+public class ViewProfilePostsAdapter extends RecyclerView.Adapter<ViewProfilePostsAdapter.ViewHolder>{
 
-    private List<Post> postList;
-    private List<Post> postListFull;
+    private List<ViewProfilePostModel> postList;
+
+    View view;
     private final int view_type_photo = 1, view_type_video = 2;
     private static int viewType;
     private Boolean isLiked = false;
@@ -53,35 +43,41 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     private Activity activity;
     private Context context;
 
-    public HomeAdapter(List<Post> postList, Activity activity, Context context) {
-        this.postList = postList;
-        postListFull = new ArrayList<>(postList);
+    public ViewProfilePostsAdapter(List<ViewProfilePostModel> postList,
+                                   Activity activity, Context context) {
         this.activity = activity;
+        this.postList = postList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == view_type_photo){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.photo_post_item,
                     parent,false);
-            return new ViewHolder(view);
+            return new ViewProfilePostsAdapter.ViewHolder(view);
 
         }else{
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_post_item,
                     parent,false);
-            return new ViewHolder(view);
+            return new ViewProfilePostsAdapter.ViewHolder(view);
         }
+    }
 
-
+    public int getItemViewType(int position){
+//        return 1;
+        if(postList.get(position).getType().equals("photo")){
+            viewType = view_type_photo;
+            return view_type_photo;
+        }else{
+            viewType = view_type_video;
+            return view_type_video;
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
         try{
             holder.text_username.setText(postList.get(position).getUsername());
         }catch (Exception e){
@@ -180,7 +176,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
         holder.text_likes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startActivity(new Intent(context, ViewLikesActivity.class));
+                activity.startActivity(new Intent(view.getContext(), ViewLikesActivity.class));
             }
         });
 
@@ -190,51 +186,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 activity.startActivity(new Intent(context, CommentsActivity.class));
             }
         });
-
-        holder.layout_top.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.startActivity(new Intent(context, ViewProfileActivity.class));
-            }
-        });
-
-
     }
-
-//    public void openBlankFragment(View view) {
-//        ViewLikesFragment blankFragment = new ViewLikesFragment();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(R.id.nav_host_fragment_activity_main, blankFragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
 
     @Override
     public int getItemCount() {
         return postList.size();
-    }
-
-//    public int getItemViewType(int position){
-//        Object post = postList.get(position);
-//
-
-//        if(messageModelList.get(position).getFrom().equals(userId)){
-//            state = true;
-//            return view_type_photo;
-//        }else{
-//            state = false;
-//            return view_type_video;
-//        }
-//    }
-    public int getItemViewType(int position){
-//        return 1;
-        if(postList.get(position).getType().equals("photo")){
-            viewType = view_type_photo;
-            return view_type_photo;
-        }else{
-            viewType = view_type_video;
-            return view_type_video;
-        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -254,8 +210,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // photo post
-            if(viewType == 1){
+            if (viewType == 1) {
                 layout_top = itemView.findViewById(R.id.layout_top);
                 image_profile = itemView.findViewById(R.id.image_profile);
                 text_username = itemView.findViewById(R.id.text_username);
@@ -269,7 +224,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
 
                 image_post = itemView.findViewById(R.id.image_post);
 
-            }else{ // video post
+            } else { // video post
                 layout_top = itemView.findViewById(R.id.layout_top);
                 image_profile = itemView.findViewById(R.id.image_profile);
                 text_username = itemView.findViewById(R.id.text_username);
@@ -285,37 +240,4 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             }
         }
     }
-    public Filter getFilter(){
-        return postFilter;
-    }
-
-    private Filter postFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-            List<Post> filteredList = new ArrayList<>();
-            if(charSequence == null || charSequence.length() == 0){
-                filteredList.addAll(postListFull);
-            }else{
-                String filterPattern = charSequence.toString().toLowerCase().trim();
-
-                for(Post item : postListFull){
-                    if(item.getUsername().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }
-                }
-            }
-
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = filteredList;
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            postList.clear();
-            postList.addAll((List) filterResults.values);
-            notifyDataSetChanged();
-        }
-    };
-
 }

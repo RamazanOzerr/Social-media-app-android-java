@@ -1,18 +1,20 @@
 package com.example.findmypet.Models;
 
-public class Post {
-    private String post_media; // url
+public class ViewProfilePostModel {
+
+    private String post_media;
     private String user_profile_photo;
     private String username;
     private int total_likes;
     private int total_comments;
-    private String type;
-    private String caption;
-    private String status;
+    private String type; // post tipi, photo or video
+    private String caption; // post un altındaki yazı
+    private String status; // user ın online-offline durumu
 
+    public ViewProfilePostModel(String post_media, String user_profile_photo, String username,
+                                int total_likes, int total_comments, String type,
+                                String caption, String status) {
 
-    public Post(String post_media, String user_profile_photo, String username,
-                int total_likes, int total_comments, String type, String caption, String status) {
         this.post_media = post_media;
         this.user_profile_photo = user_profile_photo;
         this.username = username;
@@ -21,30 +23,6 @@ public class Post {
         this.type = type;
         this.caption = caption;
         this.status = status;
-    }
-
-    public String getCaption() {
-        return caption;
-    }
-
-    public void setCaption(String caption) {
-        this.caption = caption;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getPost_media() {
@@ -85,5 +63,29 @@ public class Post {
 
     public void setTotal_comments(int total_comments) {
         this.total_comments = total_comments;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

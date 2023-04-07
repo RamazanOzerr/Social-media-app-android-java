@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -16,9 +17,13 @@
         android:theme="@style/Theme.FindMyPet"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.FollowingActivity"
+            android:name=".Activities.ViewProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.FindMyPet.SlidrActivityTheme"/>
+        <activity
+            android:name=".Activities.FollowingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FindMyPet.SlidrActivityTheme" />
         <activity
             android:name=".Activities.FollowersActivity"
             android:exported="false"
