@@ -5,13 +5,14 @@ import java.util.List;
 public class PostModel {
 
     private String username, profile_photo, url, type, comment_number,
-            like_number, post_time;
+            like_number, post_time, status, text, owner;
     private List<CommentModel> comments;
     private List<ViewLikesModel> likes;
 
+    public PostModel(){}
     public PostModel(String username, String profile_photo, String url, String type,
                      String comment_number, String like_number, String post_time,
-                     List<CommentModel> comments, List<ViewLikesModel> likes) {
+                     String status, String text, String owner) {
         this.username = username;
         this.profile_photo = profile_photo;
         this.url = url;
@@ -19,8 +20,50 @@ public class PostModel {
         this.comment_number = comment_number;
         this.like_number = like_number;
         this.post_time = post_time;
+        this.status = status;
+        this.text = text;
+        this.owner = owner;
+    }
+
+    public PostModel(String username, String profile_photo, String url, String type,
+                     String comment_number, String like_number, String post_time, String status,
+                     String text,String owner, List<CommentModel> comments, List<ViewLikesModel> likes) {
+        this.username = username;
+        this.profile_photo = profile_photo;
+        this.url = url;
+        this.type = type;
+        this.comment_number = comment_number;
+        this.like_number = like_number;
+        this.post_time = post_time;
+        this.status = status;
+        this.text = text;
+        this.owner = owner;
         this.comments = comments;
         this.likes = likes;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getUsername() {

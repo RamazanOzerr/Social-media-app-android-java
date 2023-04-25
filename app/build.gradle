@@ -42,6 +42,9 @@ dependencies {
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.github.pedromassango:doubleClick:3.0'
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:8.0.2'
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'

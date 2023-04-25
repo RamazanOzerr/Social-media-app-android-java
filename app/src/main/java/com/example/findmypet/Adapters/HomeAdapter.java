@@ -14,11 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.MediaController;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
@@ -26,16 +28,21 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.findmypet.Activities.CommentsActivity;
 import com.example.findmypet.Activities.ViewLikesActivity;
 import com.example.findmypet.Activities.ViewProfileActivity;
 import com.example.findmypet.Models.ChatModel;
-import com.example.findmypet.Models.Post;
+import com.example.findmypet.Models.PostModel;
 import com.example.findmypet.R;
 import com.google.android.material.textview.MaterialTextView;
 import com.pedromassango.doubleclick.DoubleClick;
 import com.pedromassango.doubleclick.DoubleClickListener;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +50,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> implements Filterable {
 
-    private List<Post> postList;
-    private List<Post> postListFull;
+    private List<PostModel> postList;
+    private List<PostModel> postListFull;
     private final int view_type_photo = 1, view_type_video = 2;
     private static int viewType;
     private Boolean isLiked = false;
@@ -53,7 +60,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     private Activity activity;
     private Context context;
 
-    public HomeAdapter(List<Post> postList, Activity activity, Context context) {
+    public HomeAdapter(List<PostModel> postList, Activity activity, Context context) {
         this.postList = postList;
         postListFull = new ArrayList<>(postList);
         this.activity = activity;
@@ -88,22 +95,129 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             // get it from xml
         }
         try{
-            String like_num = String.valueOf(postList.get(position).getTotal_likes());
-            holder.text_likes.setText("liked by "+like_num+" people");
+//            String like_num = String.valueOf(postList.get(position).getLike_number());
+            holder.text_likes.setText("liked by "+postList.get(position).getLike_number()+" people");
         }catch (Exception e){
             // get it from xml
         }
         try{
-            String comments_num = String.valueOf(postList.get(position).getTotal_comments());
-            holder.text_comments.setText("view all "+comments_num+" comments");
+//            String comments_num = String.valueOf(postList.get(position).getComment_number());
+            holder.text_comments.setText("view all "+postList.get(position).getComment_number()+" comments");
         }catch (Exception e){
             // get it from xml
         }
         try{
-            holder.text_caption.setText(postList.get(position).getCaption());
+            holder.text_caption.setText(postList.get(position).getText());
         }catch (Exception e){
             // get it from xml
         }
+        try{
+            Picasso.get().load(postList.get(position).getProfile_photo()).into(holder.image_profile);
+        }catch (Exception e){
+            holder.image_profile.setImageResource(R.drawable.ic_navi_profile);
+        }
+
+
+
+        // double click on the post to like it
+        final Drawable drawable = holder.image_heart.getDrawable();
+        if(postList.get(position).getType().equals("photo")){ // if post is a photo
+            try{
+                Picasso.get().load(postList.get(position).getUrl()).into(holder.image_post);
+//                Glide.with(context).downloadOnly().load(postList.get(position).getUrl())
+//                        .into(new CustomTarget<File>() {
+//                            @Override
+//                            public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+//                                Glide.with(context).load(resource).into(holder.image_post);
+//                            }
+//
+//                            @Override
+//                            public void onLoadCleared(@Nullable Drawable placeholder) {
+//
+//                            }
+//                        });
+            }catch (Exception e){
+                holder.image_post.setImageResource(R.drawable.ic_navi_profile);
+            }
+
+            holder.image_post.setOnClickListener(new DoubleClick(new DoubleClickListener() {
+                @Override
+                public void onSingleClick(View view) {
+                    holder.image_like.setImageResource(R.drawable.heart);
+                    isLiked = false;
+                    String like_num = postList.get(position).getLike_number();
+                    holder.text_likes.setText("liked by "+like_num+" people");
+                }
+
+                @Override
+                public void onDoubleClick(View view) {
+                    holder.image_heart.setAlpha(0.70f);
+                    if(drawable instanceof AnimatedVectorDrawableCompat){
+                        avd = (AnimatedVectorDrawableCompat) drawable;
+                        avd.start();
+                        isLiked = true;
+                    }else if(drawable instanceof AnimatedVectorDrawable){
+                        avd2 = (AnimatedVectorDrawable) drawable;
+                        avd2.start();
+                        isLiked = true;
+                    }
+                    holder.image_like.setImageResource(R.drawable.heart_filled);
+                    String like_num = postList.get(position).getLike_number();
+                    holder.text_likes.setText("liked by "+like_num+" people");
+                }
+            }));
+        }else{
+            MediaController controller = new MediaController(context);
+            controller.setAnchorView(holder.video_post);
+            holder.video_post.setMediaController(controller);
+            try{
+//                Picasso.get().load(postList.get(position).getUrl()).into(holder.video_post);
+                Glide.with(context).downloadOnly().load(postList.get(position).getUrl()).into(new CustomTarget<File>() {
+                    @Override
+                    public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+                        holder.video_post.setVideoPath(resource.getPath());
+                        holder.video_post.start();
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
+            }catch (Exception e){
+                //todo: we can display a text here, like it couldn been downloaded
+            }
+
+            // like animation when clicked on video
+            holder.video_post.setOnClickListener(new DoubleClick(new DoubleClickListener() {
+                @Override
+                public void onSingleClick(View view) {
+                    holder.image_like.setImageResource(R.drawable.heart);
+                    isLiked = false;
+                    String like_num = postList.get(position).getLike_number();
+                    holder.text_likes.setText("liked by "+like_num+" people");
+                }
+
+                @Override
+                public void onDoubleClick(View view) {
+                    holder.image_heart.setAlpha(0.70f);
+                    if(drawable instanceof AnimatedVectorDrawableCompat){
+                        avd = (AnimatedVectorDrawableCompat) drawable;
+                        avd.start();
+                        isLiked = true;
+                    }else if(drawable instanceof AnimatedVectorDrawable){
+                        avd2 = (AnimatedVectorDrawable) drawable;
+                        avd2.start();
+                        isLiked = true;
+                    }
+                    holder.image_like.setImageResource(R.drawable.heart_filled);
+                    String like_num = postList.get(position).getLike_number();
+                    holder.text_likes.setText("liked by "+like_num+" people");
+                }
+            }));
+        }
+
+
 //        try{
 //
 //        }catch (Exception e){
@@ -117,48 +231,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             holder.image_profile.setBorderColor(Color.RED);
         }
 
-        if(postList.get(position).getPost_media().equals("ft")){
-            holder.image_post.setImageResource(R.drawable.fatih_terim);
-        }else if(postList.get(position).getPost_media().equals("falcao")){
-            holder.image_post.setImageResource(R.drawable.img);
-        }
-        else if(postList.get(position).getPost_media().equals("icardi")){
-            holder.image_post.setImageResource(R.drawable.icardi);
-        }
-        else if(postList.get(position).getPost_media().equals("diagne")){
-            holder.image_post.setImageResource(R.drawable.diagne);
-        }
+//        if(postList.get(position).getUrl().equals("ft")){
+//            holder.image_post.setImageResource(R.drawable.fatih_terim);
+//        }else if(postList.get(position).getPost_media().equals("falcao")){
+//            holder.image_post.setImageResource(R.drawable.img);
+//        }
+//        else if(postList.get(position).getPost_media().equals("icardi")){
+//            holder.image_post.setImageResource(R.drawable.icardi);
+//        }
+//        else if(postList.get(position).getPost_media().equals("diagne")){
+//            holder.image_post.setImageResource(R.drawable.diagne);
+//        }
 
-
-        // double click on the post to like it
-        final Drawable drawable = holder.image_heart.getDrawable();
-
-        holder.image_post.setOnClickListener(new DoubleClick(new DoubleClickListener() {
-            @Override
-            public void onSingleClick(View view) {
-                holder.image_like.setImageResource(R.drawable.heart);
-                isLiked = false;
-                String like_num = String.valueOf(postList.get(position).getTotal_likes());
-                holder.text_likes.setText("liked by "+like_num+" people");
-            }
-
-            @Override
-            public void onDoubleClick(View view) {
-                holder.image_heart.setAlpha(0.70f);
-                if(drawable instanceof AnimatedVectorDrawableCompat){
-                    avd = (AnimatedVectorDrawableCompat) drawable;
-                    avd.start();
-                    isLiked = true;
-                }else if(drawable instanceof AnimatedVectorDrawable){
-                    avd2 = (AnimatedVectorDrawable) drawable;
-                    avd2.start();
-                    isLiked = true;
-                }
-                holder.image_like.setImageResource(R.drawable.heart_filled);
-                String like_num = String.valueOf(postList.get(position).getTotal_likes()+1);
-                holder.text_likes.setText("liked by "+like_num+" people");
-            }
-        }));
 
         // set like or undo it by pressing like button
         holder.image_like.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +254,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 }else{
                     holder.image_like.setImageResource(R.drawable.heart);
                     isLiked = false;
-                    String like_num = String.valueOf(postList.get(position).getTotal_likes());
+                    String like_num = postList.get(position).getLike_number();
                     holder.text_likes.setText("liked by "+like_num+" people");
                 }
             }
@@ -198,34 +282,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             }
         });
 
-
     }
-
-//    public void openBlankFragment(View view) {
-//        ViewLikesFragment blankFragment = new ViewLikesFragment();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(R.id.nav_host_fragment_activity_main, blankFragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
 
     @Override
     public int getItemCount() {
         return postList.size();
     }
 
-//    public int getItemViewType(int position){
-//        Object post = postList.get(position);
-//
-
-//        if(messageModelList.get(position).getFrom().equals(userId)){
-//            state = true;
-//            return view_type_photo;
-//        }else{
-//            state = false;
-//            return view_type_video;
-//        }
-//    }
     public int getItemViewType(int position){
 //        return 1;
         if(postList.get(position).getType().equals("photo")){
@@ -292,13 +355,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     private Filter postFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            List<Post> filteredList = new ArrayList<>();
+            List<PostModel> filteredList = new ArrayList<>();
             if(charSequence == null || charSequence.length() == 0){
                 filteredList.addAll(postListFull);
             }else{
                 String filterPattern = charSequence.toString().toLowerCase().trim();
 
-                for(Post item : postListFull){
+                for(PostModel item : postListFull){
                     if(item.getUsername().toLowerCase().contains(filterPattern)){
                         filteredList.add(item);
                     }

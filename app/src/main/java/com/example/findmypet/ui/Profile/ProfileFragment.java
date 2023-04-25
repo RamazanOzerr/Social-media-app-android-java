@@ -60,6 +60,7 @@ public class ProfileFragment extends Fragment {
         profileViewModel.getProfileInfo().observe(getViewLifecycleOwner(), new Observer<ProfileModel>() {
             @Override
             public void onChanged(ProfileModel profileModel) {
+                System.out.println("pr: "+profileModel.toString());
                 setInfo(profileModel);
                 progress.dismiss();
             }
@@ -68,7 +69,6 @@ public class ProfileFragment extends Fragment {
 
         setButtons();
         viewPosts();
-
 
         return binding.getRoot();
     }

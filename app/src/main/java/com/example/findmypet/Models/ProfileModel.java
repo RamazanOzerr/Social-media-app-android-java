@@ -70,4 +70,17 @@ public class ProfileModel {
     public void setPost_number(int post_number) {
         this.post_number = post_number;
     }
+
+    @Override
+    public String toString() {
+        return "ProfileModel{" +
+                "photo='" + photo + '\'' +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", bio='" + bio + '\'' +
+                ", follower_number=" + follower_number +
+                ", following_number=" + following_number +
+                ", post_number=" + post_number +
+                '}';
+    }
 }

@@ -2,6 +2,7 @@ package com.example.findmypet.ui.home;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,10 +11,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
@@ -23,8 +27,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.findmypet.Activities.ChatsActivity;
 import com.example.findmypet.Activities.MainActivity;
+import com.example.findmypet.Activities.SplashActivity;
 import com.example.findmypet.Adapters.HomeAdapter;
 import com.example.findmypet.Models.Post;
+import com.example.findmypet.Models.PostModel;
 import com.example.findmypet.R;
 import com.example.findmypet.Utils.OnSwipeTouchListener;
 import com.example.findmypet.databinding.FragmentHomeBinding;
@@ -36,9 +42,10 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private List<Post> postList;
+    private List<PostModel> postList;
     private RecyclerView recyclerView_home;
     private HomeAdapter adapter;
+    private ContentLoadingProgressBar progressBar;
     Activity activity;
 
 
@@ -71,24 +78,49 @@ public class HomeFragment extends Fragment {
 
 
         init();
-        homeViewModel.getPostMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
-            @Override
-            public void onChanged(List<Post> posts) {
-                // update ui
-                postList.clear();
-                postList.addAll(posts);
-//                adapter.notifyDataSetChanged();
-                //todo: burası veriyi güncelleyeceğimiz yer normalde, ama şu an db ye bağlamadığımız
-                // için henüz, adapter ı burada set ediyoruz, sonradan değiştiricez, adapter setlemesi
-                // init de olucak, burda sadece update olucak
+        ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setIcon(R.drawable.loading);
+        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        progress.show();
 
-                adapter = new HomeAdapter(postList, getActivity(), getContext());
-                recyclerView_home.setAdapter(adapter);
-            }
+//        System.out.println("evet fragment çalıştı");
+        homeViewModel.getPostMutableLiveData().observe(getViewLifecycleOwner(), postModels -> {
+//            System.out.println("view model a girdi");
+
+            updateData(postModels);
+            progress.dismiss();
+
         });
+//        homeViewModel.getPostMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<PostModel>>() {
+//            @Override
+//            public void onChanged(List<PostModel> posts) {
+//
+//                // update ui
+//                postList.clear();
+//                postList.addAll(posts);
+////                adapter.notifyDataSetChanged();
+//                //todo: burası veriyi güncelleyeceğimiz yer normalde, ama şu an db ye bağlamadığımız
+//                // için henüz, adapter ı burada set ediyoruz, sonradan değiştiricez, adapter setlemesi
+//                // init de olucak, burda sadece update olucak
+//
+//
+//                progress.dismiss();
+//            }
+//        });
 
 
         return root;
+    }
+
+
+    private void updateData(List<PostModel> postModels){
+        postList.clear();
+//        System.out.println("postModels: "+postModels.toString());
+        postList.addAll(postModels);
+        adapter = new HomeAdapter(postList, getActivity(), getContext());
+        recyclerView_home.setAdapter(adapter);
     }
 
 //    public FragmentManager getMyFragmentManager() {
@@ -98,9 +130,13 @@ public class HomeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void init(){
         recyclerView_home = binding.recyclerViewHome;
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView_home.setLayoutManager(layoutManager);
         postList = new ArrayList<>();
+//        postList = SplashActivity.getPosts();
+        System.out.println("postlar: "+postList);
+
 
         MaterialToolbar toolbar = binding.toolbarMainFragment;
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -124,6 +160,38 @@ public class HomeFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+        boolean isLoading = false;
+        recyclerView_home.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+
+                if (lastVisibleItemPosition == totalItemCount - 1) {
+                    // End has been reached, load more data
+//                    loadPosts();
+                    binding.progressBarHome.show();
+                    Toast.makeText(getContext(), "scrolled",Toast.LENGTH_SHORT).show();
+                 /*   isLoading = true;*/
+                }
+            }
+        });
+//        recyclerView_home.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+//                Toast.makeText(getContext(), "scrolled",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        recyclerView_home.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                Toast.makeText(getContext(), "scrolled",Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
 

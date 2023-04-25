@@ -65,7 +65,8 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
     private String postId;
-    String type;
+    private boolean settedPost;
+    String type; // post type, video or image
     Uri selectedUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class PostActivity extends AppCompatActivity {
         binding = ActivityPostBinding.inflate(getLayoutInflater());
 
         hasText = false;
+        settedPost = false;
 
         // initialize fields
         toolbar = findViewById(R.id.toolbar_post_activity);
@@ -124,7 +126,12 @@ public class PostActivity extends AppCompatActivity {
 
     private void setButtonListeners(){
         sendButton.setOnClickListener(view -> {
-            post();
+            if(settedPost){
+                post();
+            }else{
+                Toast.makeText(this, "You cannot share post without adding a media"
+                        ,Toast.LENGTH_SHORT).show();
+            }
         });
 
         photoIcon.setOnClickListener(view -> {
@@ -201,19 +208,22 @@ public class PostActivity extends AppCompatActivity {
             }).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
-                    postId = databaseReference.child("Posts").child(firebaseUser.getUid())
-                            .push().getKey();
-                    databaseReference = databaseReference.child("Posts")
-                            .child(firebaseUser.getUid()).child(postId);
+//                    postId = databaseReference.child("Posts").child(firebaseUser.getUid())
+//                            .push().getKey();
+                    postId = databaseReference.child("Posts").push().getKey();
+                    databaseReference = databaseReference.child("Posts").child(postId);
                     Map<String, Object> map = new HashMap<>();
+                    map.put("owner", firebaseUser.getUid());
                     map.put("username", "username");
                     map.put("profile_photo", "profile photo");
                     map.put("url",downloadUri.toString());
+                    System.out.println("type:" + finalType);
                     map.put("type", finalType);
-                    map.put("comment_number", 0);
-                    map.put("like_number", 0);
+                    map.put("comment_number", "0");
+                    map.put("like_number", "0");
                     map.put("post_time", getTime());
                     map.put("text",text.getText().toString());
+                    map.put("status","online");
                     //todo: alttaki 2 liste yorum ve like geldiğinde oluşturulacak
 //                    map.put("comments", "username"); // list
 //                    map.put("likes", "username"); // list
@@ -264,7 +274,7 @@ public class PostActivity extends AppCompatActivity {
             DatabaseReference reference = FirebaseDatabase.getInstance()
                     .getReference().child("Users")
                     .child(firebaseUser.getUid());
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.addListenerForSingleValueEvent(new ValueEventListener() { // tek seferlik sorgu
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String username = snapshot.child("username").getValue().toString();
@@ -301,18 +311,23 @@ public class PostActivity extends AppCompatActivity {
                 // Get the url of the image from data
                 selectedUri = data.getData();
                 if (selectedUri != null) {
-                    String type = getContentResolver().getType(selectedUri);
-                    if(type != null){
+                    String type_curr = getContentResolver().getType(selectedUri);
+                    System.out.println("type_curr heh " + type_curr);
+                    if(type_curr != null){
                         textView.setVisibility(View.GONE);
-                        if(type.startsWith("video/")){
+                        if(type_curr.startsWith("video/")){
+                            type = "video";
                             videoArea.setVideoURI(selectedUri);
+                            videoArea.start();
                             imageArea.setVisibility(View.GONE);
                             videoArea.setVisibility(View.VISIBLE);
                         }else{
+                            type = "photo";
                             imageArea.setImageURI(selectedUri);
                             imageArea.setVisibility(View.VISIBLE);
                             videoArea.setVisibility(View.GONE);
                         }
+                        settedPost = true;
                     }
 
                 }
