@@ -7,35 +7,29 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.MediaController;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.findmypet.Activities.CommentsActivity;
-import com.example.findmypet.Activities.ViewLikesActivity;
-import com.example.findmypet.Activities.ViewProfileActivity;
-import com.example.findmypet.Models.ChatModel;
-import com.example.findmypet.Models.PostModel;
+import com.example.findmypet.Activities.Comments.CommentsActivity;
+import com.example.findmypet.Activities.ViewLikes.ViewLikesActivity;
+import com.example.findmypet.Activities.ViewProfile.ViewProfileActivity;
+import com.example.findmypet.Activities.Post.PostModel;
 import com.example.findmypet.R;
 import com.google.android.material.textview.MaterialTextView;
 import com.pedromassango.doubleclick.DoubleClick;
@@ -166,9 +160,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                     holder.text_likes.setText("liked by "+like_num+" people");
                 }
             }));
-        }else{
-            MediaController controller = new MediaController(context);
-            controller.setAnchorView(holder.video_post);
+        }else{ // if post is a video
+            MediaController controller = new MediaController(holder.layout_middle.getContext());
+            controller.setAnchorView(holder.layout_middle);
             holder.video_post.setMediaController(controller);
             try{
 //                Picasso.get().load(postList.get(position).getUrl()).into(holder.video_post);
@@ -176,7 +170,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                     @Override
                     public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
                         holder.video_post.setVideoPath(resource.getPath());
-                        holder.video_post.start();
+//                        holder.video_post.start();
                     }
 
                     @Override
@@ -314,6 +308,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
         private AppCompatImageView image_heart;
         private AppCompatImageView image_post; // for image posts
         private VideoView video_post; // for video posts
+        private MediaController mediaController;
+        private FrameLayout layout_middle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -345,6 +341,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 image_heart = itemView.findViewById(R.id.image_like_anim);
 
                 video_post = itemView.findViewById(R.id.video_post);
+                mediaController = itemView.findViewById(R.id.mediaController);
+                layout_middle = itemView.findViewById(R.id.layout_middle);
+
             }
         }
     }

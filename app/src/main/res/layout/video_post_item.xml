@@ -58,7 +58,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <FrameLayout
                 android:id="@+id/layout_middle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,8 +85,19 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:src="@drawable/avd_instagram_like"
                     android:alpha="0"
+                    android:layout_gravity="center"
                     />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <MediaController
+                    android:id="@+id/mediaController"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_gravity="bottom|center"
+                    />
+            </FrameLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

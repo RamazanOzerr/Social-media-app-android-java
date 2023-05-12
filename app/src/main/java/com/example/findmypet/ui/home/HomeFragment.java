@@ -19,25 +19,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.example.findmypet.Activities.ChatsActivity;
-import com.example.findmypet.Activities.MainActivity;
-import com.example.findmypet.Activities.SplashActivity;
+
+import com.example.findmypet.Activities.Chats.ChatsActivity;
 import com.example.findmypet.Adapters.HomeAdapter;
-import com.example.findmypet.Models.Post;
-import com.example.findmypet.Models.PostModel;
+import com.example.findmypet.Activities.Post.PostModel;
 import com.example.findmypet.R;
 import com.example.findmypet.Utils.OnSwipeTouchListener;
 import com.example.findmypet.databinding.FragmentHomeBinding;
 import com.google.android.material.appbar.MaterialToolbar;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -173,7 +168,7 @@ public class HomeFragment extends Fragment {
                 if (lastVisibleItemPosition == totalItemCount - 1) {
                     // End has been reached, load more data
 //                    loadPosts();
-                    binding.progressBarHome.show();
+//                    binding.progressBarHome.show();
                     Toast.makeText(getContext(), "scrolled",Toast.LENGTH_SHORT).show();
                  /*   isLoading = true;*/
                 }

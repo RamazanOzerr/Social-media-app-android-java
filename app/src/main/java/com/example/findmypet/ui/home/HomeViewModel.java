@@ -1,20 +1,13 @@
 package com.example.findmypet.ui.home;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.example.findmypet.Models.CommentModel;
-import com.example.findmypet.Models.PostModel;
-import com.example.findmypet.Models.ViewLikesModel;
+
+import com.example.findmypet.Activities.Post.PostModel;
 import com.example.findmypet.Repositories.PostRepository;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
@@ -23,7 +16,6 @@ public class HomeViewModel extends ViewModel {
 //    private PostRepository postRepository = PostRepository.getInstance();
     private PostRepository postRepository;
 //    private List<PostModel> postList;
-    DatabaseReference reference;
 
     public HomeViewModel() {
         super();

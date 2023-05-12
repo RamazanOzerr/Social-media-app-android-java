@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ViewLikesActivity"
+    tools:context=".Activities.ViewLikes.ViewLikesActivity"
     android:id="@+id/constraint_following_activity"
     android:background="@color/white"
     >

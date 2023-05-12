@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.FollowersActivity"
+    tools:context=".Activities.Followers.FollowersActivity"
     android:id="@+id/constraint_followers_activity"
     android:background="@color/white"
     >

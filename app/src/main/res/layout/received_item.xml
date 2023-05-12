@@ -11,7 +11,7 @@
         android:background="@drawable/shape"
         android:id="@+id/layoutformessage">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sender Message Display Here"
@@ -23,9 +23,9 @@
             android:paddingTop="7dp"
             android:id="@+id/receivermessage">
 
-        </TextView>
+        </androidx.appcompat.widget.AppCompatTextView>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/timeofmessage"

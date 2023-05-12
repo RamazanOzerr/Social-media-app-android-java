@@ -1,6 +1,5 @@
 package com.example.findmypet.ui.Profile;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,21 +21,15 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.findmypet.Activities.ChatsActivity;
-import com.example.findmypet.Activities.FollowersActivity;
-import com.example.findmypet.Activities.FollowingActivity;
-import com.example.findmypet.Activities.ViewPostsActivity;
-import com.example.findmypet.Activities.ViewProfileActivity;
-import com.example.findmypet.Adapters.HomeAdapter;
-import com.example.findmypet.Models.Post;
+import com.example.findmypet.Activities.Followers.FollowersActivity;
+import com.example.findmypet.Activities.Followings.FollowingActivity;
+import com.example.findmypet.Activities.ViewPosts.ViewPostsActivity;
+import com.example.findmypet.Activities.ViewProfile.ViewProfileActivity;
 import com.example.findmypet.Models.ProfileModel;
 import com.example.findmypet.R;
 import com.example.findmypet.Utils.OnSwipeTouchListener;
-import com.example.findmypet.databinding.FragmentHomeBinding;
 import com.example.findmypet.databinding.FragmentProfileBinding;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 public class ProfileFragment extends Fragment {
 

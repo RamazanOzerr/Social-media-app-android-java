@@ -3,10 +3,7 @@ package com.example.findmypet.Repositories;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.findmypet.Models.CommentModel;
-import com.example.findmypet.Models.PostModel;
-import com.example.findmypet.Models.ViewLikesModel;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.findmypet.Activities.Post.PostModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -91,48 +88,10 @@ public class PostRepository {
             }
         };
 
-        Query query = reference.child("Posts").orderByChild("post_time").limitToFirst(3);
+        Query query = reference.child("Posts").orderByChild("post_time").limitToFirst(5);
         query.addListenerForSingleValueEvent(valueEventListener);
 
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                int i = 0;
-//                for(DataSnapshot snapshot1 : snapshot.getChildren()){
-//                    System.out.println("veri: "+snapshot1.toString());
-//                    System.out.println(snapshot1.getChildrenCount());
-//                    for(DataSnapshot snapshot2 : snapshot1.getChildren()){
-////                        if(i>2){
-////
-////                        }
-////                        i++;
-//                        String username = snapshot2.child("username").getValue().toString();
-//                        String profile_photo = snapshot2.child("profile_photo").getValue().toString();
-//                        String url = snapshot2.child("url").getValue().toString();
-//                        String type = snapshot2.child("type").getValue().toString();
-//                        String comment_number = snapshot2.child("comment_number").getValue().toString();
-//                        String like_number = snapshot2.child("like_number").getValue().toString();
-//                        String post_time = snapshot2.child("post_time").getValue().toString();
-//                        String status = snapshot2.child("status").getValue().toString();
-//                        String caption = snapshot2.child("text").getValue().toString();
-//                        List<CommentModel> comments = new ArrayList<>();
-//                        List<ViewLikesModel> likes = new ArrayList<>();
-//
-//                        PostModel postModel = new PostModel(username,profile_photo,url,type,
-//                                comment_number,like_number,post_time,status,caption,comments,likes);
-//
-//
-//                        postList.add(postModel);
-//                    }
-//
-//                } postsLiveData.setValue(postList);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
 
         return postsLiveData;
     }

@@ -6,44 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
     android:id="@+id/constraint_home_fragment"
+    android:background="@color/white"
     >
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarLayout_privatechat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="#FAFAFA"
         >
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/fatih_terim"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fatih terim"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <!--        <com.google.android.material.appbar.MaterialToolbar-->
-<!--            android:id="@+id/toolbar_main_fragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@color/white"-->
-<!--            app:title="@string/title_home"-->
-<!--            app:titleTextColor="@color/black"-->
-<!--            />-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_back_privatechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_privateChat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/fatih_terim"
+                android:layout_margin="10dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/neongreen"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_username_privatechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="fatih terim"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                android:layout_margin="10dp"
+                />
+        </LinearLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_to_refresh_home"
+        android:id="@+id/swipe_to_refresh_privatechat"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_home"
+            android:id="@+id/recyclerView_privatechat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/received_item" />
@@ -51,6 +72,36 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_private_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_chat">
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edittext_privatechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@null"
+            android:clipToOutline="true"
+            android:hint="Message..."
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_send_privatechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_send"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

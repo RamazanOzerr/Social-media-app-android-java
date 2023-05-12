@@ -1,6 +1,5 @@
 package com.example.findmypet.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,19 +8,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.example.findmypet.Models.CommentModel;
-import com.example.findmypet.Models.PostModel;
-import com.example.findmypet.Models.ViewLikesModel;
+import com.example.findmypet.Activities.Post.PostModel;
 import com.example.findmypet.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SplashActivity extends AppCompatActivity {

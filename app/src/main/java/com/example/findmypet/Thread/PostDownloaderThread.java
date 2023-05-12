@@ -4,9 +4,9 @@
 //
 //import androidx.annotation.NonNull;
 //
-//import com.example.findmypet.Models.CommentModel;
-//import com.example.findmypet.Models.PostModel;
-//import com.example.findmypet.Models.ViewLikesModel;
+//import com.example.findmypet.Activities.Comments.CommentModel;
+//import com.example.findmypet.Activities.Post.PostModel;
+//import com.example.findmypet.Activities.ViewLikes.ViewLikesModel;
 //import com.google.firebase.database.DataSnapshot;
 //import com.google.firebase.database.DatabaseError;
 //import com.google.firebase.database.DatabaseReference;

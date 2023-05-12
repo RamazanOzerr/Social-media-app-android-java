@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ViewPostsActivity"
+    tools:context=".Activities.ViewPosts.ViewPostsActivity"
     android:id="@+id/constraint_viewpostactivity"
     android:background="@color/white"
     >
